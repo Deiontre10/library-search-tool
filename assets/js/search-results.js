@@ -1,3 +1,25 @@
+var formEl = $("#format")
+var inputEl = $("#search")
+var submitBtn = $(".btn")
+var cardEl = $(".card")
+var cardLinkEl = $(".card-link")
+
+var formSubmit = function (event) {
+    event.preventdefault();
+
+    var userInput = inputEl.value.trim();
+    
+    if (userInput) {
+        getSearch(userInput)
+        console.log(userInput)
+    } else if (userInput) {
+        getFormat(userInput)
+    } else {
+        inputEl.textContent = ""
+        alert("Please enter a valid search");
+    }
+}
+
 var getSearch = function (q) {
     var searchUrl = 'https://www.loc.gov/search/?q=' + q + '&fo=json';
     
@@ -12,7 +34,7 @@ var getSearch = function (q) {
         }
       })
       .catch(function (error) {
-        alert('Unable to connect to GitHub');
+        alert('Unable to connect');
       });
   };
 
@@ -30,7 +52,11 @@ var getSearch = function (q) {
         }
       })
       .catch(function (error) {
-        alert('Unable to connect to GitHub');
+        alert('Unable to connect to');
       });
   };
+
+  submitBtn.on("submit", function(){
+    formSubmit();
+  });
   
